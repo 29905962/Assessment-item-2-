@@ -1,0 +1,94 @@
+Task 1 workshop 5 
+
+namespace Workshop4;
+
+public static class SelectionSort
+{
+    // Task 1
+    // Selection Sort (ascending, in-place)
+
+    // Counting rules:
+    // - Comparisons: increment once per value comparison
+    // - Swaps: increment only for a real swap
+
+    public static (int Comparisons, int Swaps) Sort(int[] data)
+    {
+        int comparisons = 0;
+        int swaps = 0;
+
+        for (int i = 0; i < data.Length - 1; i++)
+        {
+            int minIndex = i;
+
+            for (int j = i + 1; j < data.Length; j++)
+            {
+                comparisons++;
+
+                if (data[j] < data[minIndex])
+                {
+                    minIndex = j;
+                }
+            }
+
+            // Only swap if needed
+            if (minIndex != i)
+            {
+                (data[i], data[minIndex]) =
+                    (data[minIndex], data[i]);
+
+                swaps++;
+            }
+        }
+
+        return (comparisons, swaps);
+    }
+}
+
+task 2
+namespace Workshop4;
+
+public static class InsertionSort
+{
+    // Task 2
+    // Insertion Sort (ascending, in-place)
+
+    // Counting rules:
+    // - Comparisons: increment once per comparison with key
+    // - Shifts count as swaps
+
+    public static (int Comparisons, int Swaps) Sort(int[] data)
+    {
+        int comparisons = 0;
+        int swaps = 0;
+
+        for (int i = 1; i < data.Length; i++)
+        {
+            int key = data[i];
+            int j = i - 1;
+
+            while (j >= 0)
+            {
+                comparisons++;
+
+                if (data[j] > key)
+                {
+                    data[j + 1] = data[j];
+
+                    // Shift counts as swap
+                    swaps++;
+
+                    j--;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            data[j + 1] = key;
+        }
+
+        return (comparisons, swaps);
+    }
+}
+
